@@ -36,7 +36,6 @@ export default function QuickActions() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.sectionTitle}>Payments</Text>
       <Text style={styles.sectionTitle}>Measurements</Text>
       <FlatList
         data={measurementItems}

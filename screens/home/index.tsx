@@ -14,14 +14,14 @@ const Home = () => {
     <SafeAreaView>
       <View className="bg-white h-full w-full">
         <Header searchValue={searchValue} setSearchValue={setSearchValue} />
+        <FeaturedServicesBanner />
         <ScrollView showsVerticalScrollIndicator={false}>
           <QuickActions />
-          <FeaturedServicesBanner navigation={navigation} />
           <View className="h-40" />
         </ScrollView>
       </View>
     </SafeAreaView>
   );
-}
+};
 
 export default Home;
