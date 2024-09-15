@@ -11,7 +11,7 @@ interface IHeader {
 
 export const Header: FC<IHeader> = ({ searchValue, setSearchValue }) => {
   return (
-    <View className="p-4 bg-primary-burgundy">
+    <View className="h-14 px-4 pt-3 bg-primary-burgundy">
       <View className="flex flex-row items-center justify-between">
         <View className="flex flex-row items-center gap-x-2">
           <Ionicons size={20} name="location" color="#FFFFF0" />

@@ -1,13 +1,18 @@
+import { colors } from "@/constants/colors";
 import { Ionicons } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
 import { FC } from "react";
 import { ScrollView, View, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const ProfileScreen: FC = () => {
   return (
-    <SafeAreaView>
-      <View className="bg-white h-full w-full">
-        <View className="px-4 py-6 flex flex-row items-center justify-center bg-primary-burgundy">
+    <SafeAreaView
+      style={{ backgroundColor: colors.dark.primaryBurgundy }}
+      edges={["left", "right", "top"]}
+    >
+      <View className="bg-primary-black h-full w-full">
+        <View className="h-14 px-4 flex flex-row items-center justify-center bg-primary-burgundy mb-2">
           <Text className="text-3xl text-accent-ivory">Profile</Text>
         </View>
         <ScrollView>
@@ -32,8 +37,8 @@ interface ProfileItemProps {
 
 const ProfileItem: FC<ProfileItemProps> = ({ name }) => {
   return (
-    <View className="flex flex-row items-center justify-between border-b border-gray-200 mx-4">
-      <Text className="text-xl p-4 ">{name}</Text>
+    <View className="flex flex-row items-center justify-between border-b-[0.5px] border-gray-200 mx-4">
+      <Text className="text-xl p-4 text-accent-ivory">{name}</Text>
       <Ionicons name="chevron-forward" size={18} color="black" />
     </View>
   );

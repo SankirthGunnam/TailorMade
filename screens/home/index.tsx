@@ -5,14 +5,19 @@ import { FC, useState } from "react";
 import { Link, useNavigation } from "expo-router";
 import QuickActions from "@/components/QuickActions";
 import FeaturedServicesBanner from "@/components/FeaturedServiceBanner";
+import { colors } from "@/constants/colors";
+import { StatusBar } from "expo-status-bar";
 
 const Home = () => {
   const [searchValue, setSearchValue] = useState("");
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView edges={["left", "right", "bottom", "top"]}>
-      <View className="h-full w-full">
+    <SafeAreaView
+      style={{ backgroundColor: colors.dark.primaryBurgundy }}
+      edges={["left", "right", "top"]}
+    >
+      <View className="bg-primary-black h-full w-full">
         <Header searchValue={searchValue} setSearchValue={setSearchValue} />
         <FeaturedServicesBanner />
       </View>
