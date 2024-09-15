@@ -11,40 +11,40 @@ interface IHeader {
 
 export const Header: FC<IHeader> = ({ searchValue, setSearchValue }) => {
   return (
-    <View className="p-4 bg-[#8C8EFF]">
+    <View className="p-4 bg-primary-burgundy">
       <View className="flex flex-row items-center justify-between">
         <View className="flex flex-row items-center gap-x-2">
-          <Ionicons size={20} name="location" color="white" />
-          <Text className="font-bold text-lg text-white">Bangalore</Text>
-          <Ionicons size={16} name="chevron-down" color="white" />
+          <Ionicons size={20} name="location" color="#FFFFF0" />
+          <Text className="font-bold text-lg text-accent-ivory">Bangalore</Text>
+          <Ionicons size={16} name="chevron-down" color="#FFFFF0" />
         </View>
         <View className="flex flex-row items-center">
           <Link href="/qr-scanner" className="mr-5">
-            <Ionicons size={24} name="qr-code" color="white" />
+            <Ionicons size={24} name="qr-code" color="#FFFFF0" />
           </Link>
           <Link href="/notifications" className="mr-5">
-            <Ionicons size={24} name="notifications" color="white" />
+            <Ionicons size={24} name="notifications" color="#FFFFF0" />
           </Link>
           <Link href="/cart">
-            <Ionicons size={24} name="cart" color="white" />
+            <Ionicons size={24} name="cart" color="#FFFFF0" />
           </Link>
         </View>
       </View>
 
-      <View className="mt-2">
+      {/* <View className="mt-2">
         <Surface elevation={1} style={{ borderRadius: 100 }}>
           <Searchbar
             style={{
-              backgroundColor: "white",
+              backgroundColor: "#FFFFF0", // Ivory background for the search bar
               borderStyle: "solid",
               borderWidth: 1,
-              borderColor: "#e0e0e0",
+              borderColor: "#D3D3D3", // Soft Grey border
             }}
             value={searchValue}
             onChangeText={setSearchValue}
           />
         </Surface>
-      </View>
+      </View> */}
     </View>
   );
-}
+};

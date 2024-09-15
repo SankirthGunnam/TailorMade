@@ -1,11 +1,12 @@
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Tabs } from "expo-router";
+import { colors } from "@/constants/colors";
 
 const BottomTabsLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "#8C8EFF",
+        tabBarActiveTintColor: colors.dark.tint,
         tabBarInactiveTintColor: "#000",
         headerShown: false,
         tabBarStyle: {

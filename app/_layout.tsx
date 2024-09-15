@@ -5,12 +5,15 @@ import {
   setStatusBarBackgroundColor,
   setStatusBarStyle,
 } from "expo-status-bar";
+import { Platform } from "react-native";
 
 export default function RootLayout() {
   useFocusEffect(
     useCallback(() => {
-      setStatusBarBackgroundColor("#8C8EFF", true);
-      setStatusBarStyle("light", true);
+      if (Platform.OS === "android") {
+        setStatusBarBackgroundColor("#800020", true); // Deep Burgundy
+        setStatusBarStyle("light", true); // Set to light for better contrast
+      }
     }, [])
   );
 
@@ -19,10 +22,10 @@ export default function RootLayout() {
       initialRouteName="(tabs)"
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#8C8EFF",
+          backgroundColor: "#800020", // Deep Burgundy for header background
         },
         headerTitleStyle: {
-          color: "white",
+          color: "#FFFFF0", // Ivory for header title
         },
       }}
     >

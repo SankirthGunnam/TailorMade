@@ -11,14 +11,10 @@ const Home = () => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView>
-      <View className="bg-white h-full w-full">
+    <SafeAreaView edges={["left", "right", "bottom", "top"]}>
+      <View className="h-full w-full">
         <Header searchValue={searchValue} setSearchValue={setSearchValue} />
         <FeaturedServicesBanner />
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <QuickActions />
-          <View className="h-40" />
-        </ScrollView>
       </View>
     </SafeAreaView>
   );

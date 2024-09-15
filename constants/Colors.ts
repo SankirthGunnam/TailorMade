@@ -6,7 +6,7 @@
 const tintColorLight = "#FFD700"; // Gold for light mode
 const tintColorDark = "#800020"; // Deep Burgundy for dark mode
 
-export const Colors = {
+export const colors = {
   light: {
     text: "#11181C",
     background: "#fff",
