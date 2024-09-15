@@ -12,15 +12,23 @@ interface IHeader {
 export const Header: FC<IHeader> = ({ searchValue, setSearchValue }) => {
   return (
     <View className="p-4 bg-[#8C8EFF]">
-      <View className=" flex flex-row items-center justify-between">
+      <View className="flex flex-row items-center justify-between">
         <View className="flex flex-row items-center gap-x-2">
           <Ionicons size={20} name="location" color="white" />
           <Text className="font-bold text-lg text-white">Bangalore</Text>
           <Ionicons size={16} name="chevron-down" color="white" />
         </View>
-        <Link href="cart">
-          <Ionicons size={22} name="cart" color="white" />
-        </Link>
+        <View className="flex flex-row items-center">
+          <Link href="/qr-scanner" className="mr-5">
+            <Ionicons size={24} name="qr-code" color="white" />
+          </Link>
+          <Link href="/notifications" className="mr-5">
+            <Ionicons size={24} name="notifications" color="white" />
+          </Link>
+          <Link href="/cart">
+            <Ionicons size={24} name="cart" color="white" />
+          </Link>
+        </View>
       </View>
 
       <View className="mt-2">
@@ -39,4 +47,4 @@ export const Header: FC<IHeader> = ({ searchValue, setSearchValue }) => {
       </View>
     </View>
   );
-};
+}

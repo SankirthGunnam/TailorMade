@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import {
   View,
   Text,
@@ -9,31 +9,37 @@ import {
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-const gridItems = [
-    { id: '1', title: 'QR Scanner', icon: 'qr-code', route: '/qr-scanner' },
-    { id: '2', title: 'Read Prescription', icon: 'camera', route: '/prescription-reader' },
-    { id: '3', title: 'Book Clinic Visit', icon: 'medical', route: '/book-clinic' },
-    { id: '4', title: 'Book Home Visit', icon: 'home', route: '/book-home-visit' },
-    { id: '5', title: 'Health Meter', icon: 'fitness', route: '/health-meter' },
-  ];
+const COLORS = {
+  primary: "#8C8EFF",
+  background: "#f5f5f5",
+  white: "#FFFFFF",
+};
+
+const measurementItems = [
+  { id: '2', title: 'Scan Measurements', icon: 'camera', route: '/prescription-reader' },
+  { id: '3', title: 'Enter Manually', icon: 'create-outline', route: '/book-clinic' },
+];
 
 export default function QuickActions() {
   const router = useRouter();
 
-  const renderGridItem = ({ item }) => (
+  const renderGridItem = useCallback(({ item }) => (
     <TouchableOpacity
       style={styles.gridItem}
       onPress={() => router.push(item.route)}
+      accessibilityLabel={item.title}
     >
-      <Ionicons name={item.icon} size={40} color="#8C8EFF" />
+      <Ionicons name={item.icon} size={40} color={COLORS.primary} />
       <Text style={styles.gridItemText}>{item.title}</Text>
     </TouchableOpacity>
-  );
+  ), [router]);
 
   return (
     <View style={styles.container}>
+      <Text style={styles.sectionTitle}>Payments</Text>
+      <Text style={styles.sectionTitle}>Measurements</Text>
       <FlatList
-        data={gridItems}
+        data={measurementItems}
         renderItem={renderGridItem}
         keyExtractor={(item) => item.id}
         numColumns={2}
@@ -47,13 +53,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: "#f5f5f5",
+    backgroundColor: COLORS.background,
   },
-  title: {
-    fontSize: 24,
+  sectionTitle: {
+    fontSize: 20,
     fontWeight: "bold",
-    marginBottom: 20,
-    textAlign: "center",
+    marginVertical: 10,
   },
   row: {
     flex: 1,
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
     height: 150,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: COLORS.white,
     borderRadius: 10,
     margin: 5,
     padding: 10,
@@ -78,5 +83,8 @@ const styles = StyleSheet.create({
     marginTop: 10,
     textAlign: "center",
     fontSize: 14,
+  },
+  list: {
+    marginBottom: 20,
   },
 });
