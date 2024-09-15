@@ -12,7 +12,6 @@ const BottomTabsLayout = () => {
         tabBarStyle: {
           height: 60,
           backgroundColor: "#fff",
-          // borderCurve: "continuous",
           marginVertical: "auto",
           borderRadius: 20,
           marginBottom: 10,

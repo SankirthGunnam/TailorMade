@@ -7,8 +7,8 @@ const ProfileScreen: FC = () => {
   return (
     <SafeAreaView>
       <View className="bg-white h-full w-full">
-        <View className="px-4 py-6 flex flex-row items-center justify-center">
-          <Text className="text-3xl">Profile</Text>
+        <View className="px-4 py-6 flex flex-row items-center justify-center bg-primary-burgundy">
+          <Text className="text-3xl text-accent-ivory">Profile</Text>
         </View>
         <ScrollView>
           <ProfileItem name="Personal Information" />
