@@ -2,8 +2,14 @@ import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Tabs } from "expo-router";
 import { colors } from "@/constants/colors";
 import { StatusBar } from "expo-status-bar";
+import { Platform } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const BottomTabsLayout = () => {
+  const bottomInset = useSafeAreaInsets().bottom;
+  const paddingBottom = bottomInset + 10;
+  const tabBarHeight = Platform.OS === "android" ? 68 : 68 + bottomInset;
+
   return (
     <>
       <StatusBar style="light" />
@@ -13,13 +19,9 @@ const BottomTabsLayout = () => {
           tabBarInactiveTintColor: colors.dark.tabIconDefault,
           headerShown: false,
           tabBarStyle: {
+            height: tabBarHeight,
+            paddingBottom: paddingBottom,
             backgroundColor: colors.dark.primaryBurgundy,
-            // marginVertical: "auto",
-            // borderRadius: 20,
-            // marginBottom: 10,
-            // marginHorizontal: 10,
-            // paddingBottom: 5,
-            // position: "absolute",
           },
           tabBarHideOnKeyboard: true,
         }}
@@ -28,9 +30,14 @@ const BottomTabsLayout = () => {
           name="index"
           options={{
             title: "Home",
-            tabBarIcon: ({ color, focused }) => (
+            tabBarIcon: ({
+              color,
+              focused,
+            }: {
+              color: string;
+              focused: boolean;
+            }) => (
               <TabBarIcon
-                size={20}
                 name={focused ? "home" : "home-outline"}
                 color={color}
               />
@@ -41,9 +48,14 @@ const BottomTabsLayout = () => {
           name="profile"
           options={{
             title: "Profile",
-            tabBarIcon: ({ color, focused }) => (
+            tabBarIcon: ({
+              color,
+              focused,
+            }: {
+              color: string;
+              focused: boolean;
+            }) => (
               <TabBarIcon
-                size={20}
                 name={focused ? "person" : "person-outline"}
                 color={color}
               />
