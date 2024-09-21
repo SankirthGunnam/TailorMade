@@ -1,9 +1,9 @@
-import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Tabs } from "expo-router";
-import { colors } from "@/constants/colors";
+import { colors } from "@/src/constants/colors";
 import { StatusBar } from "expo-status-bar";
 import { Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { TabBarIcon } from "@/src/components/navigation/TabBarIcon";
 
 const BottomTabsLayout = () => {
   const bottomInset = useSafeAreaInsets().bottom;

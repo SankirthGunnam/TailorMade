@@ -1,4 +1,4 @@
-import { Cart } from "@/screens/cart";
+import { Cart } from "@/src/screens/cart";
 
 const CartLayout = () => {
   return <Cart />;

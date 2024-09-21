@@ -1,4 +1,4 @@
-import { colors } from "@/constants/colors";
+import { colors } from "@/src/constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 import { StatusBar } from "expo-status-bar";
 import { FC } from "react";
@@ -11,6 +11,7 @@ const ProfileScreen: FC = () => {
       style={{ backgroundColor: colors.dark.primaryBurgundy }}
       edges={["left", "right", "top"]}
     >
+      <StatusBar style="light" />
       <View className="bg-primary-black h-full w-full">
         <View className="h-14 px-4 flex flex-row items-center justify-center bg-primary-burgundy mb-2">
           <Text className="text-3xl text-accent-ivory">Profile</Text>
