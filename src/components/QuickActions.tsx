@@ -34,7 +34,7 @@ const measurementItems: MeasurementItemType[] = [
     id: "3",
     title: "Enter Manually",
     icon: "create-outline",
-    route: "/book-clinic",
+    route: "/show-measurements",
   },
 ];
 
