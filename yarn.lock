@@ -5458,6 +5458,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-camera@npm:~15.0.16":
+  version: 15.0.16
+  resolution: "expo-camera@npm:15.0.16"
+  dependencies:
+    invariant: "npm:^2.2.4"
+  peerDependencies:
+    expo: "*"
+  checksum: 10c0/7b963f6ad6d9c43bbf2de8981439dc858c39c39fa808086e18058b0f738ebf67a9433d5c8fcc84ad0fb050103e576b9c11a7113ec165d3fd63835870e1267d5c
+  languageName: node
+  linkType: hard
+
 "expo-constants@npm:~16.0.0, expo-constants@npm:~16.0.2":
   version: 16.0.2
   resolution: "expo-constants@npm:16.0.2"
@@ -11375,9 +11386,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tailorMade@workspace:.":
+"tailormade@workspace:.":
   version: 0.0.0-use.local
-  resolution: "tailorMade@workspace:."
+  resolution: "tailormade@workspace:."
   dependencies:
     "@babel/core": "npm:^7.20.0"
     "@expo/ngrok": "npm:^4.1.3"
@@ -11387,6 +11398,7 @@ __metadata:
     "@types/react": "npm:~18.2.45"
     "@types/react-test-renderer": "npm:^18.0.7"
     expo: "npm:^51.0.32"
+    expo-camera: "npm:~15.0.16"
     expo-constants: "npm:~16.0.2"
     expo-font: "npm:~12.0.7"
     expo-linear-gradient: "npm:~13.0.2"

@@ -6,6 +6,7 @@ import { useNavigation } from "expo-router";
 import FeaturedServicesBanner from "@/src/components/FeaturedServiceBanner";
 import { colors } from "@/src/constants/colors";
 import { StatusBar } from "expo-status-bar";
+import QuickActions from "@/src/components/QuickActions";
 
 const Home = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -19,6 +20,7 @@ const Home = () => {
       <View className="bg-primary-black h-full w-full">
         <Header searchValue={searchValue} setSearchValue={setSearchValue} />
         <FeaturedServicesBanner />
+        <QuickActions />
       </View>
     </SafeAreaView>
   );

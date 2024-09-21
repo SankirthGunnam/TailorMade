@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { FC, useCallback } from "react";
 import {
   View,
   Text,
@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { colors } from "../constants/colors";
 
 const COLORS = {
   primary: "#8C8EFF",
@@ -15,75 +16,56 @@ const COLORS = {
   white: "#FFFFFF",
 };
 
-const measurementItems = [
-  { id: '2', title: 'Scan Measurements', icon: 'camera', route: '/prescription-reader' },
-  { id: '3', title: 'Enter Manually', icon: 'create-outline', route: '/book-clinic' },
+type MeasurementItemType = {
+  id: string;
+  title: string;
+  icon: "camera" | "create-outline";
+  route: string;
+};
+
+const measurementItems: MeasurementItemType[] = [
+  {
+    id: "2",
+    title: "Scan Measurements",
+    icon: "camera",
+    route: "/open-camera",
+  },
+  {
+    id: "3",
+    title: "Enter Manually",
+    icon: "create-outline",
+    route: "/book-clinic",
+  },
 ];
 
 export default function QuickActions() {
-  const router = useRouter();
-
-  const renderGridItem = useCallback(({ item }) => (
-    <TouchableOpacity
-      style={styles.gridItem}
-      onPress={() => router.push(item.route)}
-      accessibilityLabel={item.title}
-    >
-      <Ionicons name={item.icon} size={40} color={COLORS.primary} />
-      <Text style={styles.gridItemText}>{item.title}</Text>
-    </TouchableOpacity>
-  ), [router]);
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.sectionTitle}>Measurements</Text>
-      <FlatList
-        data={measurementItems}
-        renderItem={renderGridItem}
-        keyExtractor={(item) => item.id}
-        numColumns={2}
-        columnWrapperStyle={styles.row}
-      />
+    <View className="flex flex-1 bg-primary-black p-5 mt-10">
+      <Text className="text-accent-softGrey text-xl my-2">Measurements</Text>
+      {measurementItems.map((item) => (
+        <ActionItem key={item.id} item={item} />
+      ))}
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: COLORS.background,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginVertical: 10,
-  },
-  row: {
-    flex: 1,
-    justifyContent: "space-between",
-  },
-  gridItem: {
-    flex: 1,
-    height: 150,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: COLORS.white,
-    borderRadius: 10,
-    margin: 5,
-    padding: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  gridItemText: {
-    marginTop: 10,
-    textAlign: "center",
-    fontSize: 14,
-  },
-  list: {
-    marginBottom: 20,
-  },
-});
+interface ActionItemProps {
+  item: MeasurementItemType;
+}
+
+const ActionItem: FC<ActionItemProps> = ({ item }) => {
+  const router = useRouter();
+
+  return (
+    <TouchableOpacity
+      className="h-36 justify-center items-center bg-primary-burgundy rounded-lg mx-1 my-2 p-2 shadow"
+      onPress={() => router.push(item.route)}
+      accessibilityLabel={item.title}
+    >
+      <Ionicons name={item.icon} size={40} color={colors.dark.accentRoseGold} />
+      <Text className="mt-2 text-center text-base text-accent-ivory">
+        {item.title}
+      </Text>
+    </TouchableOpacity>
+  );
+};

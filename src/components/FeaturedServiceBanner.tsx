@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Dimensions, Text } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import FastImage from "react-native-fast-image";
@@ -44,17 +44,19 @@ const featuredServices: FeaturedService[] = [
 const { width } = Dimensions.get("window");
 
 const FeaturedServicesBanner: React.FC<FeaturedServicesBannerProps> = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
-    <View style={{ flex: 1 }} className="w-full h-full">
+    <View style={{ height: width / 2 }} className="w-full">
       <Carousel
         loop
         width={width}
-        height={width / 1.8}
+        height={width / 2}
         autoPlay={true}
         data={featuredServices}
         scrollAnimationDuration={1000}
         renderItem={({ item }) => (
-          <View className="relative">
+          <View className="relative h-[90%] w-[95%] rounded-xl overflow-hidden mx-auto my-auto border border-[#fff2]">
             <LinearGradient
               start={{ x: 0.5, y: 0 }}
               end={{ x: 0.5, y: 0.8 }}
@@ -62,19 +64,39 @@ const FeaturedServicesBanner: React.FC<FeaturedServicesBannerProps> = () => {
               className="w-full h-full"
             >
               <View className="absolute top-0 left-0 w-full h-full -z-10">
-                <FastImage
-                  source={{ uri: item.image }}
-                  style={{ width: "100%", height: "100%" }}
-                  resizeMode="cover"
-                />
+                <View className="w-full h-full">
+                  <FastImage
+                    source={{ uri: item.image }}
+                    style={{ width: "100%", height: "100%" }}
+                    className="mx-auto"
+                    resizeMode="cover"
+                  />
+                </View>
               </View>
-              <View className="absolute px-2 py-4 w-full bottom-0">
-                <Text className="text-white">{item.description}</Text>
+              <View className="absolute px-2 py-4 w-full bottom-0 z-50">
+                <Text className="text-accent-ivory text-xl font-bold">
+                  {item.description}
+                </Text>
               </View>
             </LinearGradient>
           </View>
         )}
+        onProgressChange={(_offsetProgress, absoluteProgress) => {
+          setActiveIndex(Math.round(absoluteProgress));
+        }}
       />
+      <View className="absolute -bottom-1 left-0 right-0 flex-row justify-center">
+        {featuredServices.map((_, index) => (
+          <View
+            key={index}
+            className={`h-2 w-2 rounded-full mx-1 ${
+              index === activeIndex || (index === 0 && activeIndex === 3)
+                ? "bg-white"
+                : "bg-gray-400"
+            }`}
+          />
+        ))}
+      </View>
     </View>
   );
 };
