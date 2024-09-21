@@ -1,5 +1,5 @@
 {
-  "name": "tailorMade",
+  "name": "tailormade",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -21,6 +21,7 @@
     "expo": "^51.0.32",
     "expo-constants": "~16.0.2",
     "expo-font": "~12.0.7",
+    "expo-linear-gradient": "~13.0.2",
     "expo-linking": "~6.3.1",
     "expo-router": "~3.5.16",
     "expo-splash-screen": "~0.27.5",

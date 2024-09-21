@@ -2,6 +2,7 @@ import React from "react";
 import { View, Dimensions, Text } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
 import FastImage from "react-native-fast-image";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface FeaturedService {
   id: string;
@@ -48,24 +49,29 @@ const FeaturedServicesBanner: React.FC<FeaturedServicesBannerProps> = () => {
       <Carousel
         loop
         width={width}
-        height={width / 2}
+        height={width / 1.8}
         autoPlay={true}
         data={featuredServices}
         scrollAnimationDuration={1000}
-        // onSnapToItem={(index) => console.log("current index:", index)}
-        renderItem={({ item, index }) => (
-          <View
-            style={{
-              flex: 1,
-              borderWidth: 1,
-              justifyContent: "center",
-            }}
-          >
-            <FastImage
-              source={{ uri: item.image }}
-              style={{ width: "100%", height: "100%" }}
-            />
-            <Text className="text-white text-sm">{item.description}</Text>
+        renderItem={({ item }) => (
+          <View className="relative">
+            <LinearGradient
+              start={{ x: 0.5, y: 0 }}
+              end={{ x: 0.5, y: 0.8 }}
+              colors={["#fff0", "black"]}
+              className="w-full h-full"
+            >
+              <View className="absolute top-0 left-0 w-full h-full -z-10">
+                <FastImage
+                  source={{ uri: item.image }}
+                  style={{ width: "100%", height: "100%" }}
+                  resizeMode="cover"
+                />
+              </View>
+              <View className="absolute px-2 py-4 w-full bottom-0">
+                <Text className="text-white">{item.description}</Text>
+              </View>
+            </LinearGradient>
           </View>
         )}
       />
