@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Dimensions, Text } from "react-native";
 import Carousel from "react-native-reanimated-carousel";
-import FastImage from "react-native-fast-image";
+import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 
 interface FeaturedService {
@@ -65,7 +65,7 @@ const FeaturedServicesBanner: React.FC<FeaturedServicesBannerProps> = () => {
             >
               <View className="absolute top-0 left-0 w-full h-full -z-10">
                 <View className="w-full h-full">
-                  <FastImage
+                  <Image
                     source={{ uri: item.image }}
                     style={{ width: "100%", height: "100%" }}
                     className="mx-auto"
