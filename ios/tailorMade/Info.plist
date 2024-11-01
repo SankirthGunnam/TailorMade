@@ -67,6 +67,10 @@
       <string>OpenSans-Regular.ttf</string>
       <string>OpenSans-SemiBold.ttf</string>
       <string>OpenSans-SemiBoldItalic.ttf</string>
+      <string>Caveat-Regular.ttf</string>
+      <string>Caveat-Medium.ttf</string>
+      <string>Caveat-SemiBold.ttf</string>
+      <string>Caveat-Bold.ttf</string>
     </array>
     <key>UILaunchStoryboardName</key>
     <string>SplashScreen</string>

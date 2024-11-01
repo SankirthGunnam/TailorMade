@@ -16,6 +16,10 @@ export default function RootLayout() {
     "OpenSans-Regular": require("../../assets/fonts/OpenSans-Regular.ttf"),
     "OpenSans-SemiBold": require("../../assets/fonts/OpenSans-SemiBold.ttf"),
     "OpenSans-SemiBoldItalic": require("../../assets/fonts/OpenSans-SemiBoldItalic.ttf"),
+    "Caveat-Bold": require("../../assets/fonts/Caveat-Bold.ttf"),
+    "Caveat-Regular": require("../../assets/fonts/Caveat-Regular.ttf"),
+    "Caveat-Medium": require("../../assets/fonts/Caveat-Medium.ttf"),
+    "Caveat-SemiBold": require("../../assets/fonts/Caveat-SemiBold.ttf"),
   });
 
   const isSignedIn = false; // Placeholder for authentication state, replace with jotai atom
