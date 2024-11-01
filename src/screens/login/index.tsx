@@ -5,6 +5,7 @@ import OTPInput from "./otpInput";
 
 const LoginScreen = () => {
   const [otpRequested, setOtpRequested] = useState(false);
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   return (
     <View className="h-full w-full flex items-center justify-center bg-primary-burgundy">
@@ -21,9 +22,16 @@ const LoginScreen = () => {
       </View>
       <View className="h-[250px] w-full px-10 items-center justify-center absolute bottom-0">
         {otpRequested ? (
-          <OTPInput setOtpRequested={setOtpRequested} />
+          <OTPInput
+            phoneNumber={phoneNumber}
+            setOtpRequested={setOtpRequested}
+          />
         ) : (
-          <PhoneNumberScreen setOtpRequested={setOtpRequested} />
+          <PhoneNumberScreen
+            phoneNumber={phoneNumber}
+            setPhoneNumber={setPhoneNumber}
+            setOtpRequested={setOtpRequested}
+          />
         )}
       </View>
     </View>

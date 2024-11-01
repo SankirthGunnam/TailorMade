@@ -1,6 +1,8 @@
 import { Stack } from "expo-router";
 import "../../global.css";
 import { useFonts } from "expo-font";
+import { useAtomValue } from "jotai";
+import { isSignedInAtom } from "../atoms/auth";
 
 export default function RootLayout() {
   const [] = useFonts({
@@ -22,7 +24,9 @@ export default function RootLayout() {
     "Caveat-SemiBold": require("../../assets/fonts/Caveat-SemiBold.ttf"),
   });
 
-  const isSignedIn = false; // Placeholder for authentication state, replace with jotai atom
+  const isSignedIn = useAtomValue(isSignedInAtom); // Placeholder for authentication state, replace with jotai atom
+
+  console.log("is signed in:", isSignedIn);
 
   return (
     <Stack

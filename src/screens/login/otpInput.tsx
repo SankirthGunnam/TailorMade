@@ -6,15 +6,34 @@ import React, {
   FC,
   useEffect,
 } from "react";
-import { View, Text, TextInput, BackHandler, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  BackHandler,
+  Pressable,
+  Alert,
+} from "react-native";
 import { router } from "expo-router";
 import PrimaryButton from "@/src/components/PrimaryButton";
+import axios from "axios";
+import { server_url } from "@/src/constants/constants";
+import { useSetAtom } from "jotai";
+import {
+  accessTokenAtom,
+  isSignedInAtom,
+  refreshTokenAtom,
+} from "@/src/atoms/auth";
 
 interface OTPInputProps {
   setOtpRequested: Dispatch<SetStateAction<boolean>>;
+  phoneNumber: string;
 }
 
-const OTPInput: FC<OTPInputProps> = ({ setOtpRequested }) => {
+const OTPInput: FC<OTPInputProps> = ({ setOtpRequested, phoneNumber }) => {
+  const setAccessToken = useSetAtom(accessTokenAtom);
+  const setRefreshToken = useSetAtom(refreshTokenAtom);
+  const setIsSignedIn = useSetAtom(isSignedInAtom);
   const [otp, setOtp] = useState("");
   const inputRef = useRef<TextInput>(null);
 
@@ -29,7 +48,31 @@ const OTPInput: FC<OTPInputProps> = ({ setOtpRequested }) => {
   const handleVerifyOTP = async () => {
     // Here you would typically make an API call to verify the OTP
     // Assuming OTP verification is successful, navigate to BottomTabsLayout
-    router.replace({ pathname: "/authStack" });
+    try {
+      // Veirfy OTP request from Django server
+      const response = await axios.post(`${server_url}/login/verify-otp/`, {
+        phone: `+91${phoneNumber}`,
+        otp: otp,
+        headers: { "Content-Type": "application/json" },
+      });
+      // console.log("otp respnose :", response);
+      if (response.status === 200 && response.data.is_verified) {
+        console.log("OTP verified successfully");
+        console.log("otp respnose :", response.data);
+        setIsSignedIn(true);
+        setAccessToken(response.data.access_token);
+        setRefreshToken(response.data.refresh_token);
+        router.replace({ pathname: "/authStack" });
+      } else {
+        setIsSignedIn(false);
+        setAccessToken("");
+        setRefreshToken("");
+        Alert.alert("Invalid OTP", "Please enter a valid OTP.");
+      }
+    } catch (error) {
+      console.error("Error verifing OTP:", error);
+      Alert.alert("Error", "Could not verify OTP. Please try again later.");
+    }
   };
 
   const backhandler = () => {
