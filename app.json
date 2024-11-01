@@ -53,7 +53,11 @@
             "./assets/fonts/OpenSans-MediumItalic.ttf",
             "./assets/fonts/OpenSans-Regular.ttf",
             "./assets/fonts/OpenSans-SemiBold.ttf",
-            "./assets/fonts/OpenSans-SemiBoldItalic.ttf"
+            "./assets/fonts/OpenSans-SemiBoldItalic.ttf",
+            "./assets/fonts/Caveat-Regular.ttf",
+            "./assets/fonts/Caveat-Medium.ttf",
+            "./assets/fonts/Caveat-SemiBold.ttf",
+            "./assets/fonts/Caveat-Bold.ttf"
           ]
         }
       ]
