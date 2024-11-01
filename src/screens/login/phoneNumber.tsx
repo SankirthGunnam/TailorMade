@@ -1,25 +1,30 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  Alert,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import React, { Dispatch, FC, useState } from "react";
+import { View, Text, TextInput, Alert } from "react-native";
 import axios from "axios"; // or use fetch if preferred
 import { server_url } from "@/src/constants/constants";
+import { SetStateAction } from "jotai";
+import PrimaryButton from "@/src/components/PrimaryButton";
 
-export default function PhoneNumberScreen() {
+interface PhoneNumberScreenProps {
+  setOtpRequested: Dispatch<SetStateAction<boolean>>;
+}
+
+const PhoneNumberScreen: FC<PhoneNumberScreenProps> = ({ setOtpRequested }) => {
   const [phoneNumber, setPhoneNumber] = useState("");
-  const navigation = useNavigation();
+  const [isFocused, setIsFocused] = useState(false);
 
   const validatePhoneNumber = () => {
     // Basic validation: Indian phone numbers should be 10 digits
     const phoneRegex = /^[6-9]\d{9}$/;
     return phoneRegex.test(phoneNumber);
+  };
+
+  const handlePhoneNumberInput = (text: string) => {
+    const numberRegex = /^[6-9][0-9]*$/;
+    if (!numberRegex.test(text) && text !== "") {
+      return;
+    }
+    setPhoneNumber(text);
   };
 
   const handleSendOtp = async () => {
@@ -31,15 +36,13 @@ export default function PhoneNumberScreen() {
       return;
     }
 
-    // Immediately navigate to the OTP screen
-    navigation.navigate("otp-screen");
-
     try {
       // Send OTP request to Django server
       await axios.post(`${server_url}/login/request-otp/`, {
         phone: `+91${phoneNumber}`,
         headers: { "Content-Type": "application/json" },
       });
+      setOtpRequested(true);
     } catch (error) {
       console.error("Error sending OTP:", error);
       Alert.alert("Error", "Could not send OTP. Please try again later.");
@@ -47,83 +50,30 @@ export default function PhoneNumberScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>Vesteera</Text>
-
-      <Image
-        source={require("../../../assets/images/splash.png")} // Replace with the path to your image file
-        style={styles.image}
-      />
-
-      <View style={styles.inputContainer}>
-        <Text style={styles.countryCode}>+ 91</Text>
+    <View className="h-full w-full flex items-center justify-center">
+      <View className="flex flex-row items-center bg-accent-ivory px-3 rounded-lg w-4/5 h-14">
+        <Text className="font-OpenSansSemiBold text-primary-burgundy text-xl">
+          + 91
+        </Text>
+        <View className="w-[1.5px] h-10 bg-primary-burgundy ml-3 mr-4" />
         <TextInput
-          style={styles.phoneInput}
-          placeholder="Phone Number"
+          placeholder={isFocused ? "" : "Phone Number"}
           keyboardType="phone-pad"
-          placeholderTextColor="#D8AFAF"
-          onChangeText={setPhoneNumber}
+          placeholderTextColor="#B76E79"
+          onChangeText={handlePhoneNumberInput}
           value={phoneNumber}
+          autoFocus
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          maxLength={10}
+          className="font-OpenSansSemiBold text-primary-burgundy text-xl flex-1 h-full"
         />
       </View>
-
-      <TouchableOpacity style={styles.button} onPress={handleSendOtp}>
-        <Text style={styles.buttonText}>Send OTP</Text>
-      </TouchableOpacity>
+      <View className="w-4/5 mt-5">
+        <PrimaryButton buttonText="Send OTP" onPress={handleSendOtp} />
+      </View>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#7D0C18",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 20,
-  },
-  logo: {
-    fontSize: 36,
-    color: "#FFD700",
-    fontWeight: "bold",
-    marginBottom: 40,
-  },
-  image: {
-    width: 200, // Adjust according to your image size
-    height: 300,
-    resizeMode: "contain",
-    marginBottom: 40,
-  },
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: "#FFF7E5",
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 15,
-    marginBottom: 20,
-    width: "100%",
-  },
-  countryCode: {
-    fontSize: 16,
-    color: "#7D0C18",
-    marginRight: 10,
-  },
-  phoneInput: {
-    flex: 1,
-    fontSize: 16,
-    color: "#7D0C18",
-  },
-  button: {
-    backgroundColor: "#FFD700",
-    paddingVertical: 15,
-    borderRadius: 10,
-    alignItems: "center",
-    width: "100%",
-  },
-  buttonText: {
-    color: "#7D0C18",
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-});
+export default PhoneNumberScreen;
