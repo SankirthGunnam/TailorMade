@@ -1,4 +1,4 @@
-import CameraComponent from "../components/Camera";
+import CameraComponent from "../../components/Camera";
 
 const CameraLayout = () => {
   return <CameraComponent />;
