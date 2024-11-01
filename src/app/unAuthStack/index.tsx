@@ -1,7 +1,7 @@
-import OnboardingScreen from "../../screens/onboarding";
+import AppIntroScreen from "../../screens/appIntro";
 
 const OnboardingLayout = () => {
-  return <OnboardingScreen />;
+  return <AppIntroScreen />;
 };
 
 export default OnboardingLayout;

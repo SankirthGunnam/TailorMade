@@ -7,10 +7,16 @@ import PrimaryButton from "@/src/components/PrimaryButton";
 
 interface PhoneNumberScreenProps {
   setOtpRequested: Dispatch<SetStateAction<boolean>>;
+  phoneNumber: string;
+  setPhoneNumber: Dispatch<SetStateAction<string>>;
 }
 
-const PhoneNumberScreen: FC<PhoneNumberScreenProps> = ({ setOtpRequested }) => {
-  const [phoneNumber, setPhoneNumber] = useState("");
+const PhoneNumberScreen: FC<PhoneNumberScreenProps> = ({
+  setOtpRequested,
+  phoneNumber,
+  setPhoneNumber,
+}) => {
+  // const [phoneNumber, setPhoneNumber] = useState("");
   const [isFocused, setIsFocused] = useState(false);
 
   const validatePhoneNumber = () => {
@@ -38,11 +44,14 @@ const PhoneNumberScreen: FC<PhoneNumberScreenProps> = ({ setOtpRequested }) => {
 
     try {
       // Send OTP request to Django server
-      await axios.post(`${server_url}/login/request-otp/`, {
+      const response = await axios.post(`${server_url}/login/request-otp/`, {
         phone: `+91${phoneNumber}`,
         headers: { "Content-Type": "application/json" },
       });
-      setOtpRequested(true);
+      console.log("otp respnose :", response);
+      if (response.status === 200) {
+        setOtpRequested(true);
+      }
     } catch (error) {
       console.error("Error sending OTP:", error);
       Alert.alert("Error", "Could not send OTP. Please try again later.");
