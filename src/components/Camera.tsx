@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
+import { server_url } from "../constants/constants";
 
 const CameraComponent = () => {
   const router = useRouter();
@@ -50,10 +51,7 @@ const CameraComponent = () => {
 
     console.log("Uploading video");
     try {
-      uploadFile(
-        "http://192.168.1.7:8000/measurement/process-video/",
-        formData
-      );
+      uploadFile(`${server_url}/measurement/process-video/`, formData);
     } catch (error: any) {
       console.error("Error uploading video:", error?.message);
       if (error?.message === "Network request failed") {

@@ -8,8 +8,8 @@ export default function Index() {
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       isSignedIn
-        ? router.navigate("/authStack")
-        : router.navigate("/unAuthStack");
+        ? router.replace("/authStack")
+        : router.replace("/unAuthStack");
     }, 0);
     return () => clearTimeout(timeoutId);
   }, []);
