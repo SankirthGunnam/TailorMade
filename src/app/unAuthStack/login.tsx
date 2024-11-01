@@ -1,7 +1,7 @@
-import LoginScreen from "@/src/screens/login";
+import PhoneNumberScreen from "@/src/screens/login/phoneNumber";
 
 const LoginLayout = () => {
-  return <LoginScreen />;
+  return <PhoneNumberScreen />;
 };
 
 export default LoginLayout;
